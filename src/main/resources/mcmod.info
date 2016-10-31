@@ -1,0 +1,16 @@
+[
+{
+  "modid": "touchofbeacon",
+  "name": "Touch of Beacon",
+  "description": "Adds beacons that feed you.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "https://github.com/rolandoislas/Touch-of-Beacon",
+  "updateUrl": "",
+  "authorList": ["rolandoislas"],
+  "credits": "Sugar, spice, and 10/10 with rice.",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
