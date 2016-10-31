@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 @Mod(modid = TouchOfBacon.MODID, version = TouchOfBacon.VERSION, name = TouchOfBacon.NAME)
 public class TouchOfBacon {
-    static final String MODID = "touchofbeacon";
+    public static final String MODID = "touchofbeacon";
     static final String VERSION = "1.0";
     static final String NAME = "Touch of Beacon";
     @Mod.Instance(MODID)
