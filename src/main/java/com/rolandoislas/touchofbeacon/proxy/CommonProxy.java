@@ -1,8 +1,6 @@
 package com.rolandoislas.touchofbeacon.proxy;
 
-import com.rolandoislas.touchofbeacon.registry.ModBlocks;
-import com.rolandoislas.touchofbeacon.registry.ModItems;
-import com.rolandoislas.touchofbeacon.registry.Recipes;
+import com.rolandoislas.touchofbeacon.registry.*;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -14,6 +12,7 @@ public class CommonProxy {
 	public void preInit(FMLPreInitializationEvent event) {
 		ModBlocks.register();
 		ModItems.register();
+		Potions.register();
 	}
 
 	public void init(FMLInitializationEvent event) {
@@ -22,5 +21,6 @@ public class CommonProxy {
 
 	public void postInit(FMLPostInitializationEvent event) {
 		Recipes.register();
+		TileEntities.register();
 	}
 }

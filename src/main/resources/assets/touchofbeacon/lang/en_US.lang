@@ -18,3 +18,4 @@ tile.touchofbeacon.food.potato.name=Potato Block
 tile.touchofbeacon.food.carrot.name=Carrot Block
 tile.touchofbeacon.food.beetroot.name=Beetroot Block
 tile.touchofbeacon.food.apple.name=Apple Block
+effect.touchofbeacon.food=Fed
