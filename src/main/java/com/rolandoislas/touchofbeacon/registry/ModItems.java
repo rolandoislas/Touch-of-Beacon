@@ -1,6 +1,9 @@
 package com.rolandoislas.touchofbeacon.registry;
 
+import com.rolandoislas.touchofbeacon.blocks.EnumFood;
+import com.rolandoislas.touchofbeacon.blocks.EnumTier;
 import com.rolandoislas.touchofbeacon.items.ItemBeacon;
+import com.rolandoislas.touchofbeacon.items.ItemFood;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.client.model.ModelLoader;
@@ -11,20 +14,25 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
  */
 public class ModItems {
 	public static final ItemBlock BEACON = new ItemBeacon(ModBlocks.BEACON);
-	//public static final ItemBlock FOOD = new ItemBeacon(ModBlocks.FOOD);
+	public static final ItemBlock FOOD = new ItemFood(ModBlocks.FOOD);
 
 	public static void register() {
-		// Textures
-		ModelLoader.setCustomModelResourceLocation(BEACON, 0, new ModelResourceLocation(
-				BEACON.getRegistryName(), "inventory_0"));
-		ModelLoader.setCustomModelResourceLocation(BEACON, 1, new ModelResourceLocation(
-				BEACON.getRegistryName(), "inventory_1"));
-		ModelLoader.setCustomModelResourceLocation(BEACON, 2, new ModelResourceLocation(
-				BEACON.getRegistryName(), "inventory_2"));
-		ModelLoader.setCustomModelResourceLocation(BEACON, 3, new ModelResourceLocation(
-				BEACON.getRegistryName(), "inventory_3"));
-		// Items
+		registerItems();
+		registerTextures();
+
+	}
+
+	private static void registerTextures() {
+		for (EnumTier tier : EnumTier.values())
+			ModelLoader.setCustomModelResourceLocation(BEACON, tier.getMetadata(),
+					new ModelResourceLocation(BEACON.getRegistryName(), "tier=" + tier.getName()));
+		for (EnumFood food : EnumFood.values())
+			ModelLoader.setCustomModelResourceLocation(FOOD, food.getMeta(),
+					new ModelResourceLocation(FOOD.getRegistryName(), "food=" + food.getName()));
+	}
+
+	private static void registerItems() {
 		GameRegistry.register(BEACON);
-		//GameRegistry.register(FOOD);
+		GameRegistry.register(FOOD);
 	}
 }

@@ -3,10 +3,6 @@
     "tier=zero": { "model": "touchofbeacon:beacon_tier_zero" },
     "tier=one": { "model": "touchofbeacon:beacon_tier_one" },
     "tier=two": { "model": "touchofbeacon:beacon_tier_two" },
-    "tier=three": { "model": "touchofbeacon:beacon_tier_three" },
-    "inventory_0": { "model": "touchofbeacon:beacon_tier_zero" },
-    "inventory_1": { "model": "touchofbeacon:beacon_tier_one" },
-    "inventory_2": { "model": "touchofbeacon:beacon_tier_two" },
-    "inventory_3": { "model": "touchofbeacon:beacon_tier_three" }
+    "tier=three": { "model": "touchofbeacon:beacon_tier_three" }
   }
 }

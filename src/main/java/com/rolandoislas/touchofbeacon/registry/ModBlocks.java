@@ -10,10 +10,10 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
  */
 public class ModBlocks {
 	public static final Block BEACON = new BlockBeacon();
-	//public static final Block FOOD = new BlockFood();
+	public static final Block FOOD = new BlockFood();
 
 	public static void register() {
 		GameRegistry.register(BEACON);
-		//GameRegistry.register(FOOD);
+		GameRegistry.register(FOOD);
 	}
 }

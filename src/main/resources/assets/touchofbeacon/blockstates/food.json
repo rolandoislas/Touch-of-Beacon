@@ -1,5 +1,20 @@
 {
   "variants": {
-    "normal": { "model": "slime" }
+    "food=beef": { "model": "touchofbeacon:food_beef" },
+    "food=beef_raw": { "model": "touchofbeacon:food_beef_raw" },
+    "food=pork": { "model": "touchofbeacon:food_pork" },
+    "food=pork_raw": { "model": "touchofbeacon:food_pork_raw" },
+    "food=chicken": { "model": "touchofbeacon:food_chicken" },
+    "food=chicken_raw": { "model": "touchofbeacon:food_chicken_raw" },
+    "food=fish": { "model": "touchofbeacon:food_fish" },
+    "food=fish_raw": { "model": "touchofbeacon:food_fish_raw" },
+    "food=lamb": { "model": "touchofbeacon:food_lamb" },
+    "food=lamb_raw": { "model": "touchofbeacon:food_lamb_raw" },
+    "food=rabbit": { "model": "touchofbeacon:food_rabbit" },
+    "food=rabbit_raw": { "model": "touchofbeacon:food_rabbit_raw" },
+    "food=potato": { "model": "touchofbeacon:food_potato" },
+    "food=carrot": { "model": "touchofbeacon:food_carrot" },
+    "food=apple": { "model": "touchofbeacon:food_apple" },
+    "food=beetroot": { "model": "touchofbeacon:food_beetroot" }
   }
 }
