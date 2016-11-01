@@ -26,7 +26,7 @@ public class PotionFood extends Potion {
 		if (player.getFoodStats().getFoodLevel() < tier.getFoodLevel())
 			player.getFoodStats().addStats(1, 0);
 		if (player.getFoodStats().getSaturationLevel() < tier.getSaturationLevel())
-			player.getFoodStats().setFoodSaturationLevel(tier.getSaturationLevel());
+			player.getFoodStats().addStats(1, 1);
 	}
 
 	@Override

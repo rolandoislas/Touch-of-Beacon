@@ -16,13 +16,7 @@ public class ModItems {
 	public static final ItemBlock BEACON = new ItemBeacon(ModBlocks.BEACON);
 	public static final ItemBlock FOOD = new ItemFood(ModBlocks.FOOD);
 
-	public static void register() {
-		registerItems();
-		registerTextures();
-
-	}
-
-	private static void registerTextures() {
+	public static void registerTextures() {
 		for (EnumTier tier : EnumTier.values())
 			ModelLoader.setCustomModelResourceLocation(BEACON, tier.getMetadata(),
 					new ModelResourceLocation(BEACON.getRegistryName(), "tier=" + tier.getName()));
@@ -31,7 +25,7 @@ public class ModItems {
 					new ModelResourceLocation(FOOD.getRegistryName(), "food=" + food.getName()));
 	}
 
-	private static void registerItems() {
+	public static void registerItems() {
 		GameRegistry.register(BEACON);
 		GameRegistry.register(FOOD);
 	}
