@@ -1,6 +1,7 @@
 package com.rolandoislas.touchofbeacon.blocks;
 
 import com.rolandoislas.touchofbeacon.TouchOfBacon;
+import com.rolandoislas.touchofbeacon.registry.ModCreativeTabs;
 import com.rolandoislas.touchofbeacon.tileentity.TileEntityBeacon;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
@@ -29,6 +30,7 @@ public class BlockBeacon extends net.minecraft.block.BlockBeacon {
 		this.setRegistryName("beacon");
 		this.setDefaultState(this.blockState.getBaseState().withProperty(TIER_PROPERTY_ENUM, EnumTier.ZERO));
 		this.setLightLevel(1);
+		this.setCreativeTab(ModCreativeTabs.MAIN);
 	}
 
 	@Override

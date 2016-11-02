@@ -1,6 +1,7 @@
 package com.rolandoislas.touchofbeacon.blocks;
 
 import com.rolandoislas.touchofbeacon.TouchOfBacon;
+import com.rolandoislas.touchofbeacon.registry.ModCreativeTabs;
 import net.minecraft.block.BlockSlime;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.PropertyEnum;
@@ -26,6 +27,7 @@ public class BlockFood extends BlockSlime {
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FOOD_PROPERTY_ENUM, EnumFood.BEEF));
 		this.setHardness(0.6f);
 		this.setSoundType(SoundType.SLIME);
+		this.setCreativeTab(ModCreativeTabs.MAIN);
 	}
 
 	@Override
