@@ -22,6 +22,7 @@ public class BlockFood extends BlockSlime {
 		this.setUnlocalizedName(TouchOfBacon.MODID + ".food");
 		this.setRegistryName("food");
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FOOD_PROPERTY_ENUM, EnumFood.BEEF));
+		this.setHardness(0.6f);
 	}
 
 	@Override
@@ -48,5 +49,10 @@ public class BlockFood extends BlockSlime {
 	@Override
 	public int damageDropped(IBlockState state) {
 		return state.getValue(FOOD_PROPERTY_ENUM).getMeta();
+	}
+
+	@Override
+	public boolean isToolEffective(String type, IBlockState state) {
+		return type.equals("axe");
 	}
 }

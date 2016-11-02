@@ -1,19 +1,15 @@
 package com.rolandoislas.touchofbeacon.tileentity;
 
 import com.rolandoislas.touchofbeacon.blocks.BlockFood;
-import com.rolandoislas.touchofbeacon.blocks.EnumTier;
-import com.rolandoislas.touchofbeacon.potion.PotionFood;
+import com.rolandoislas.touchofbeacon.registry.ModOreDictionary;
 import com.rolandoislas.touchofbeacon.registry.Potions;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionAttackDamage;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.FoodStats;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.List;
 
@@ -40,8 +36,8 @@ public class TileEntityBeacon extends net.minecraft.tileentity.TileEntityBeacon 
 		}
 		// Check a single block - tier zero
 		if (getBlockMetadata() == 0) {
-			isComplete = this.worldObj.getBlockState(new BlockPos(this.getPos().down())).getBlock()
-					instanceof BlockFood;
+			Block block = this.worldObj.getBlockState(new BlockPos(this.getPos().down())).getBlock();
+			isComplete = isCompatibleBase(block);
 			return;
 		}
 		// Check levels for tiers one through three
@@ -54,7 +50,7 @@ public class TileEntityBeacon extends net.minecraft.tileentity.TileEntityBeacon 
 				for (int z = 0; z < levelSize; z++) {
 					BlockPos checkPos = new BlockPos(startX + x, y, startZ + z);
 					Block block = this.worldObj.getBlockState(checkPos).getBlock();
-					if (!(block instanceof BlockFood)) {
+					if (!isCompatibleBase(block)) {
 						isComplete = false;
 						return;
 					}
@@ -62,6 +58,15 @@ public class TileEntityBeacon extends net.minecraft.tileentity.TileEntityBeacon 
 			}
 		}
 		isComplete = true;
+	}
+
+	private boolean isCompatibleBase(Block block) {
+		int foodBlockId = OreDictionary.getOreID(ModOreDictionary.FOOD_BLOCK);
+		int[] ids = OreDictionary.getOreIDs(new ItemStack(block));
+		for (int id : ids)
+			if (id == foodBlockId)
+				return true;
+		return false;
 	}
 
 	private void feedPlayers() {

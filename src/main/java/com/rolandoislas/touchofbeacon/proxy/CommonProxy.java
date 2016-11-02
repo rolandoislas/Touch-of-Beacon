@@ -20,6 +20,7 @@ public class CommonProxy {
 	}
 
 	public void postInit(FMLPostInitializationEvent event) {
+		ModOreDictionary.register();
 		Recipes.register();
 		TileEntities.register();
 	}
