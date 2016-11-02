@@ -28,6 +28,7 @@ public class BlockBeacon extends net.minecraft.block.BlockBeacon {
 		this.setUnlocalizedName(TouchOfBacon.MODID + ".beacon");
 		this.setRegistryName("beacon");
 		this.setDefaultState(this.blockState.getBaseState().withProperty(TIER_PROPERTY_ENUM, EnumTier.ZERO));
+		this.setLightLevel(1);
 	}
 
 	@Override

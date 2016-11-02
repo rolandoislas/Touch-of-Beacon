@@ -1,6 +1,5 @@
 package com.rolandoislas.touchofbeacon.tileentity;
 
-import com.rolandoislas.touchofbeacon.blocks.BlockFood;
 import com.rolandoislas.touchofbeacon.registry.ModOreDictionary;
 import com.rolandoislas.touchofbeacon.registry.Potions;
 import net.minecraft.block.Block;
@@ -62,7 +61,10 @@ public class TileEntityBeacon extends net.minecraft.tileentity.TileEntityBeacon 
 
 	private boolean isCompatibleBase(Block block) {
 		int foodBlockId = OreDictionary.getOreID(ModOreDictionary.FOOD_BLOCK);
-		int[] ids = OreDictionary.getOreIDs(new ItemStack(block));
+		ItemStack item = new ItemStack(block);
+		if (item.getItem() == null)
+			return false;
+		int[] ids = OreDictionary.getOreIDs(item);
 		for (int id : ids)
 			if (id == foodBlockId)
 				return true;
@@ -89,5 +91,10 @@ public class TileEntityBeacon extends net.minecraft.tileentity.TileEntityBeacon 
 	@Override
 	public float shouldBeamRender() {
 			return isComplete ? 1 : 0;
+	}
+
+	@Override
+	public AxisAlignedBB getRenderBoundingBox() {
+		return INFINITE_EXTENT_AABB;
 	}
 }

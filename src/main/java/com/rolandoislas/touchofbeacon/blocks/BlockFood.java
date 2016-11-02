@@ -2,12 +2,14 @@ package com.rolandoislas.touchofbeacon.blocks;
 
 import com.rolandoislas.touchofbeacon.TouchOfBacon;
 import net.minecraft.block.BlockSlime;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockRenderLayer;
 
 import java.util.List;
 
@@ -23,6 +25,7 @@ public class BlockFood extends BlockSlime {
 		this.setRegistryName("food");
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FOOD_PROPERTY_ENUM, EnumFood.BEEF));
 		this.setHardness(0.6f);
+		this.setSoundType(SoundType.SLIME);
 	}
 
 	@Override
@@ -54,5 +57,15 @@ public class BlockFood extends BlockSlime {
 	@Override
 	public boolean isToolEffective(String type, IBlockState state) {
 		return type.equals("axe");
+	}
+
+	@Override
+	public boolean isOpaqueCube(IBlockState state) {
+		return true;
+	}
+
+	@Override
+	public BlockRenderLayer getBlockLayer() {
+		return BlockRenderLayer.SOLID;
 	}
 }
