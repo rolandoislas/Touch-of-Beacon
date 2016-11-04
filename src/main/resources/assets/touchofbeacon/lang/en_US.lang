@@ -18,5 +18,18 @@ tile.touchofbeacon.food.potato.name=Potato Block
 tile.touchofbeacon.food.carrot.name=Carrot Block
 tile.touchofbeacon.food.beetroot.name=Beetroot Block
 tile.touchofbeacon.food.apple.name=Apple Block
-effect.touchofbeacon.food=Fed
+
 itemGroup.touchofbeacon=Touch of Beacon
+
+effect.touchofbeacon.food=Fed
+
+potion.potency.3=IV
+potion.potency.99=C
+
+potion.effect.touchofbeacon.food=Potion of Satiety
+
+splash_potion.effect.touchofbeacon.food=Splash Potion of Satiety
+
+lingering_potion.effect.touchofbeacon.food=Lingering Potion of Satiety
+
+tipped_arrow.effect.touchofbeacon.food=Arrow of Satiety
