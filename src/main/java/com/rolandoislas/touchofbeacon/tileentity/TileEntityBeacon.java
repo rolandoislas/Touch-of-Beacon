@@ -82,8 +82,10 @@ public class TileEntityBeacon extends net.minecraft.tileentity.TileEntityBeacon 
 			List<EntityPlayer> list = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, axisalignedbb);
 
 			for (EntityPlayer entityplayer : list) {
-				entityplayer.addPotionEffect(new PotionEffect(Potions.FOOD,
-						(5 + 5 * getBlockMetadata()) * 20, getBlockMetadata(), true, true));
+				if (entityplayer.getActivePotionEffect(Potions.FOOD) == null ||
+						entityplayer.getActivePotionEffect(Potions.FOOD).getIsAmbient())
+					entityplayer.addPotionEffect(new PotionEffect(Potions.FOOD, (5 + 5 * getBlockMetadata()) * 20,
+							getBlockMetadata(), true, true));
 			}
 		}
 	}
