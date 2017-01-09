@@ -3,6 +3,7 @@ package com.rolandoislas.touchofbeacon.registry;
 import com.rolandoislas.touchofbeacon.blocks.EnumFood;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public class ModOreDictionary {
 		// Register sea lantern with ore dict since it does not have an entry
 		OreDictionary.registerOre("sealantern", Blocks.SEA_LANTERN);
 		// Food block
-		List<ItemStack> foodBlockItems = new ArrayList<ItemStack>();
+		NonNullList<ItemStack> foodBlockItems = NonNullList.create();
 		ModItems.FOOD.getSubItems(ModItems.FOOD, ModItems.FOOD.getCreativeTab(), foodBlockItems);
 		for (ItemStack item : foodBlockItems) {
 			OreDictionary.registerOre(FOOD_BLOCK, item);

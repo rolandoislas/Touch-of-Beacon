@@ -21,7 +21,7 @@ public class TileEntityBeacon extends net.minecraft.tileentity.TileEntityBeacon 
 	@Override
 	public void updateBeacon() {
 		super.updateBeacon();
-		if (this.worldObj == null)
+		if (this.world == null)
 			return;
 		checkBeaconBlocks();
 		feedPlayers();
@@ -29,13 +29,13 @@ public class TileEntityBeacon extends net.minecraft.tileentity.TileEntityBeacon 
 
 	private void checkBeaconBlocks() {
 		// Check if there is a path to the sky
-		if (!this.worldObj.canBlockSeeSky(this.getPos())) {
+		if (!this.world.canBlockSeeSky(this.getPos())) {
 			isComplete = false;
 			return;
 		}
 		// Check a single block - tier zero
 		if (getBlockMetadata() == 0) {
-			Block block = this.worldObj.getBlockState(new BlockPos(this.getPos().down())).getBlock();
+			Block block = this.world.getBlockState(new BlockPos(this.getPos().down())).getBlock();
 			isComplete = isCompatibleBase(block);
 			return;
 		}
@@ -48,7 +48,7 @@ public class TileEntityBeacon extends net.minecraft.tileentity.TileEntityBeacon 
 			for (int x = 0; x < levelSize; x++) {
 				for (int z = 0; z < levelSize; z++) {
 					BlockPos checkPos = new BlockPos(startX + x, y, startZ + z);
-					Block block = this.worldObj.getBlockState(checkPos).getBlock();
+					Block block = this.world.getBlockState(checkPos).getBlock();
 					if (!isCompatibleBase(block)) {
 						isComplete = false;
 						return;
@@ -62,7 +62,7 @@ public class TileEntityBeacon extends net.minecraft.tileentity.TileEntityBeacon 
 	private boolean isCompatibleBase(Block block) {
 		int foodBlockId = OreDictionary.getOreID(ModOreDictionary.FOOD_BLOCK);
 		ItemStack item = new ItemStack(block);
-		if (item.getItem() == null)
+		if (item.isEmpty())
 			return false;
 		int[] ids = OreDictionary.getOreIDs(item);
 		for (int id : ids)
@@ -72,14 +72,14 @@ public class TileEntityBeacon extends net.minecraft.tileentity.TileEntityBeacon 
 	}
 
 	private void feedPlayers() {
-		if (this.isComplete && !this.worldObj.isRemote) {
+		if (this.isComplete && !this.world.isRemote) {
 			double radius = this.getBlockMetadata() * 10d + 10d;
 			int x = this.pos.getX();
 			int y = this.pos.getY();
 			int z = this.pos.getZ();
 			AxisAlignedBB axisalignedbb = new AxisAlignedBB(x, y, z, x + 1, y + 1, z + 1).expandXyz(radius)
-					.addCoord(0, this.worldObj.getHeight(), 0);
-			List<EntityPlayer> list = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, axisalignedbb);
+					.addCoord(0, this.world.getHeight(), 0);
+			List<EntityPlayer> list = this.world.getEntitiesWithinAABB(EntityPlayer.class, axisalignedbb);
 
 			for (EntityPlayer entityplayer : list) {
 				if (entityplayer.getActivePotionEffect(Potions.FOOD) == null ||

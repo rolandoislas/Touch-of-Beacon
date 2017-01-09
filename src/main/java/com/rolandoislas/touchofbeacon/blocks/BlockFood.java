@@ -11,6 +11,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.NonNullList;
 
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class BlockFood extends BlockSlime {
 	}
 
 	@Override
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, List<ItemStack> list) {
+	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list) {
 		for (EnumFood food : EnumFood.values())
 			list.add(new ItemStack(itemIn, 1, food.getMeta()));
 	}
