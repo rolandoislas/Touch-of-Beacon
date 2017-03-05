@@ -3,6 +3,9 @@
 Touch of Beacon
 ---
 
+Release: [![Build Status](https://travis-ci.org/rolandoislas/Touch-of-Beacon.svg?branch=master)](https://travis-ci.org/rolandoislas/Touch-of-Beacon)
+Dev: [![Build Status](https://travis-ci.org/rolandoislas/Touch-of-Beacon.svg?branch=develop)](https://travis-ci.org/rolandoislas/Touch-of-Beacon)
+
 Touch of Beacon is a Minecraft Mod with one goal; never let a player go hungry. Are you tired of spice in your life? Then this is the mod for you.
 
 The core of the mod is a potion effect that will feed the player, never letting them go below a certain point. How powerful the effect, depends on the tier of beacon or potion. The best results lie with the top tier, where you will be fed to the point that you just regenerate from joy.
