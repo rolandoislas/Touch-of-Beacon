@@ -1,16 +1,12 @@
 package com.rolandoislas.touchofbeacon.tileentity;
 
+import com.rolandoislas.touchofbeacon.api.TouchOfBeaconApi;
 import com.rolandoislas.touchofbeacon.registry.ModOreDictionary;
-import com.rolandoislas.touchofbeacon.registry.Potions;
 import net.minecraft.block.Block;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.oredict.OreDictionary;
-
-import java.util.List;
 
 /**
  * Created by Rolando on 10/31/2016.
@@ -74,19 +70,7 @@ public class TileEntityBeacon extends net.minecraft.tileentity.TileEntityBeacon 
 	private void feedPlayers() {
 		if (this.isComplete && !this.worldObj.isRemote) {
 			double radius = this.getBlockMetadata() * 10d + 10d;
-			int x = this.pos.getX();
-			int y = this.pos.getY();
-			int z = this.pos.getZ();
-			AxisAlignedBB axisalignedbb = new AxisAlignedBB(x, y, z, x + 1, y + 1, z + 1).expandXyz(radius)
-					.addCoord(0, this.worldObj.getHeight(), 0);
-			List<EntityPlayer> list = this.worldObj.getEntitiesWithinAABB(EntityPlayer.class, axisalignedbb);
-
-			for (EntityPlayer entityplayer : list) {
-				if (entityplayer.getActivePotionEffect(Potions.FOOD) == null ||
-						entityplayer.getActivePotionEffect(Potions.FOOD).getIsAmbient())
-					entityplayer.addPotionEffect(new PotionEffect(Potions.FOOD, (5 + 5 * getBlockMetadata()) * 20,
-							getBlockMetadata(), true, true));
-			}
+			TouchOfBeaconApi.applyFedToPlayersAround(worldObj, pos, radius, getBlockMetadata());
 		}
 	}
 
