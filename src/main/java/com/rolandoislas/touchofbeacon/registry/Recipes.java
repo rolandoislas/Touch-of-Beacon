@@ -1,5 +1,6 @@
 package com.rolandoislas.touchofbeacon.registry;
 
+import com.rolandoislas.touchofbeacon.TouchOfBacon;
 import com.rolandoislas.touchofbeacon.blocks.EnumFood;
 import com.rolandoislas.touchofbeacon.blocks.EnumTier;
 import net.minecraft.init.Items;
@@ -7,6 +8,7 @@ import net.minecraft.init.PotionTypes;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionHelper;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
@@ -22,9 +24,18 @@ public class Recipes {
 		// Beacon
 		for (EnumTier tier : EnumTier.values()) {
 			EnumTier.CraftingItems craft = tier.getCraftingItems();
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.BEACON, 1, tier.getMetadata()),
+			ItemStack item = new ItemStack(ModItems.BEACON, 1, tier.getMetadata());
+			ShapedOreRecipe recipe = new ShapedOreRecipe(new ResourceLocation(TouchOfBacon.MODID),
+					item,
 					"CCC", "CMC", "BBB",
-					'C', craft.getCover(), 'M', craft.getCenter(), 'B', craft.getBase()));
+					'C', craft.getCover(), 'M', craft.getCenter(), 'B', craft.getBase());
+			recipe.setRegistryName(item.getUnlocalizedName());
+			GameRegistry.register(recipe);
+			/*
+			GameRegistry.addShapedRecipe(new ResourceLocation(String.format("%s.item", item.getUnlocalizedName())),
+					new ResourceLocation(TouchOfBacon.MODID), item, "CCC", "CMC", "BBB",
+					'C', craft.getCover(), 'M', craft.getCenter(), 'B', craft.getBase());
+			*/
 		}
 
 		// Food blocks
@@ -33,31 +44,37 @@ public class Recipes {
 			Item[] items = new Item[craft.getAmount()];
 			for (int slot = 0; slot < craft.getAmount(); slot++)
 				items[slot] = craft.getItem();
-			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.FOOD, 1, food.getMeta()), items));
+			ItemStack item = new ItemStack(ModItems.FOOD, 1, food.getMeta());
+			ShapelessOreRecipe blockRecipe = new ShapelessOreRecipe(new ResourceLocation(TouchOfBacon.MODID), item,
+					items);
+			blockRecipe.setRegistryName(String.format("%s.item", item.getUnlocalizedName()));
+			GameRegistry.register(blockRecipe);
+			/*
+			GameRegistry.addShapelessRecipe(new ResourceLocation(String.format("%s.item", item.getUnlocalizedName())),
+					new ResourceLocation(TouchOfBacon.MODID), item,
+					Ingredient.fromItems(items));
 			// Block back to items
-			GameRegistry.addRecipe(new ShapelessOreRecipe(
-					new ItemStack(craft.getItem(), craft.getAmount()),
-					new ItemStack(ModItems.FOOD, 1, food.getMeta())));
+			GameRegistry.addShapelessRecipe(new ResourceLocation(String.format("%s.item", item.getUnlocalizedName())),
+					new ResourceLocation(TouchOfBacon.MODID), new ItemStack(craft.getItem(), craft.getAmount()),
+					Ingredient.fromItem(item.getItem()));
+			*/
+			// Block back to items
+			ShapelessOreRecipe itemRecipe = new ShapelessOreRecipe(new ResourceLocation(TouchOfBacon.MODID),
+					new ItemStack(craft.getItem(), craft.getAmount()), item);
+			itemRecipe.setRegistryName(String.format("%s.block", item.getUnlocalizedName()));
+			GameRegistry.register(itemRecipe);
 		}
 		// Satiety Potions
-		PotionHelper.ItemPredicateInstance foodBlockPredicate = new PotionHelper.ItemPredicateInstance(ModItems.FOOD);
-		PotionHelper.registerPotionTypeConversion(PotionTypes.AWKWARD, foodBlockPredicate, Potions.TYPE_FOOD);
-		PotionHelper.registerPotionTypeConversion(Potions.TYPE_FOOD, foodBlockPredicate, Potions.TYPE_FOOD_1);
-		PotionHelper.registerPotionTypeConversion(Potions.TYPE_FOOD_1, foodBlockPredicate, Potions.TYPE_FOOD_2);
-		PotionHelper.registerPotionTypeConversion(Potions.TYPE_FOOD_2, foodBlockPredicate, Potions.TYPE_FOOD_3);
-		PotionHelper.registerPotionTypeConversion(Potions.TYPE_FOOD_3, foodBlockPredicate, PotionTypes.THICK);
+		PotionHelper.addMix(Potions.TYPE_FOOD, ModItems.FOOD, Potions.TYPE_FOOD);
+		PotionHelper.addMix(Potions.TYPE_FOOD_1, ModItems.FOOD, Potions.TYPE_FOOD_1);
+		PotionHelper.addMix(Potions.TYPE_FOOD_2, ModItems.FOOD, Potions.TYPE_FOOD_2);
+		PotionHelper.addMix(Potions.TYPE_FOOD_3, ModItems.FOOD, Potions.TYPE_FOOD_3);
 
 		// Levitation Potions
-		PotionHelper.ItemPredicateInstance featherPredicate = new PotionHelper.ItemPredicateInstance(Items.FEATHER);
-		PotionHelper.ItemPredicateInstance redstonePredicate = new PotionHelper.ItemPredicateInstance(Items.REDSTONE);
-		PotionHelper.ItemPredicateInstance glowstonePredicate =
-				new PotionHelper.ItemPredicateInstance(Items.GLOWSTONE_DUST);
-		PotionHelper.registerPotionTypeConversion(PotionTypes.AWKWARD, featherPredicate, Potions.TYPE_LEVITATION);
-		PotionHelper.registerPotionTypeConversion(Potions.TYPE_LEVITATION, redstonePredicate,
-				Potions.TYPE_LEVITATION_LONG);
-		PotionHelper.registerPotionTypeConversion(Potions.TYPE_LEVITATION, glowstonePredicate,
-				Potions.TYPE_LEVITATION_STRONG);
-		PotionHelper.registerPotionTypeConversion(Potions.TYPE_LEVITATION_STRONG, glowstonePredicate,
+		PotionHelper.addMix(PotionTypes.AWKWARD, Items.FEATHER, Potions.TYPE_LEVITATION);
+		PotionHelper.addMix(Potions.TYPE_LEVITATION, Items.REDSTONE, Potions.TYPE_LEVITATION_LONG);
+		PotionHelper.addMix(Potions.TYPE_LEVITATION, Items.GLOWSTONE_DUST, Potions.TYPE_LEVITATION_STRONG);
+		PotionHelper.addMix(Potions.TYPE_LEVITATION_STRONG, Items.GLOWSTONE_DUST,
 				Potions.TYPE_LEVITATION_EXTRA_STRONG);
 	}
 }

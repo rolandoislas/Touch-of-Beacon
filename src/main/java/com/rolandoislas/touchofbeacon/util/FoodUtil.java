@@ -24,8 +24,8 @@ public class FoodUtil {
 		int x = pos.getX();
 		int y = pos.getY();
 		int z = pos.getZ();
-		AxisAlignedBB axisalignedbb = new AxisAlignedBB(x, y, z, x + 1, y + 1, z + 1).expandXyz(radius)
-				.addCoord(0, world.getHeight(), 0);
+		AxisAlignedBB axisalignedbb = new AxisAlignedBB(x - radius / 2, 0, z - radius / 2,
+				x + radius / 2, world.getHeight(), z + radius / 2);
 		List<EntityPlayer> list = world.getEntitiesWithinAABB(EntityPlayer.class, axisalignedbb);
 
 		for (EntityPlayer entityplayer : list) {

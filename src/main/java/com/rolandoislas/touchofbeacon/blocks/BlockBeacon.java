@@ -35,10 +35,9 @@ public class BlockBeacon extends net.minecraft.block.BlockBeacon {
 	}
 
 	@Override
-	//@SideOnly(Side.CLIENT)
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list) {
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
 		for (int i = 0; i < 4; i++)
-			list.add(new ItemStack(itemIn, 1, i));
+			list.add(new ItemStack(this, 1, i));
 	}
 
 	@Override
