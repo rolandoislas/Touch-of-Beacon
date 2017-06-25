@@ -20,7 +20,7 @@ public class ModOreDictionary {
 		OreDictionary.registerOre("sealantern", Blocks.SEA_LANTERN);
 		// Food block
 		NonNullList<ItemStack> foodBlockItems = NonNullList.create();
-		ModItems.FOOD.getSubItems(ModItems.FOOD, ModItems.FOOD.getCreativeTab(), foodBlockItems);
+		ModItems.FOOD.getSubItems(ModItems.FOOD.getCreativeTab(), foodBlockItems);
 		for (ItemStack item : foodBlockItems) {
 			OreDictionary.registerOre(FOOD_BLOCK, item);
 			OreDictionary.registerOre(FOOD_BLOCK + getSubItemOreDictSuffix(item), item);

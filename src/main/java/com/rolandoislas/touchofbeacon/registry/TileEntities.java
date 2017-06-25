@@ -1,5 +1,6 @@
 package com.rolandoislas.touchofbeacon.registry;
 
+import com.rolandoislas.touchofbeacon.TouchOfBacon;
 import com.rolandoislas.touchofbeacon.tileentity.TileEntityBeacon;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -9,6 +10,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class TileEntities {
 
 	public static void register() {
-		GameRegistry.registerTileEntity(TileEntityBeacon.class, "beacon");
+		GameRegistry.registerTileEntity(TileEntityBeacon.class, String.format("%s.beacon", TouchOfBacon.MODID));
 	}
 }
