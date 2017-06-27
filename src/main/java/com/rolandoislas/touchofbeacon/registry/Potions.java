@@ -5,6 +5,7 @@ import com.rolandoislas.touchofbeacon.potion.PotionFood;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionType;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 /**
@@ -42,20 +43,20 @@ public class Potions {
 
 	public static void register() {
 		// Potions
-		GameRegistry.register(FOOD);
+		ForgeRegistries.POTIONS.register(FOOD);
 
 		// Potion Types (Causes Minecraft to register potion, splash, lingering, and arrow)
-		GameRegistry.register(TYPE_FOOD);
-		GameRegistry.register(TYPE_FOOD_1);
-		GameRegistry.register(TYPE_FOOD_2);
-		GameRegistry.register(TYPE_FOOD_3);
+		ForgeRegistries.POTION_TYPES.register(TYPE_FOOD);
+		ForgeRegistries.POTION_TYPES.register(TYPE_FOOD_1);
+		ForgeRegistries.POTION_TYPES.register(TYPE_FOOD_2);
+		ForgeRegistries.POTION_TYPES.register(TYPE_FOOD_3);
 
 		// Levitation has a lang entry. Register it!
 		try {
-			GameRegistry.register(TYPE_LEVITATION);
-			GameRegistry.register(TYPE_LEVITATION_LONG);
-			GameRegistry.register(TYPE_LEVITATION_STRONG);
-			GameRegistry.register(TYPE_LEVITATION_EXTRA_STRONG);
+			ForgeRegistries.POTION_TYPES.register(TYPE_LEVITATION);
+			ForgeRegistries.POTION_TYPES.register(TYPE_LEVITATION_LONG);
+			ForgeRegistries.POTION_TYPES.register(TYPE_LEVITATION_STRONG);
+			ForgeRegistries.POTION_TYPES.register(TYPE_LEVITATION_EXTRA_STRONG);
 		} catch (Exception ignore) {}
 	}
 }

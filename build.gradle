@@ -27,9 +27,9 @@ compileJava {
 }
 
 minecraft {
-    version = "1.12-14.21.0.2347"
+    version = "1.12-14.21.0.2373"
     runDir = "run"
-    mappings = "snapshot_20170624"
+    mappings = "snapshot_20170626"
 }
 
 if (ext.tag) {
