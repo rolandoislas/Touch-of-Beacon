@@ -7,6 +7,7 @@ import com.rolandoislas.touchofbeacon.items.ItemFood;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 /**
@@ -26,7 +27,7 @@ public class ModItems {
 	}
 
 	public static void registerItems() {
-		GameRegistry.register(BEACON);
-		GameRegistry.register(FOOD);
+		ForgeRegistries.ITEMS.register(BEACON);
+		ForgeRegistries.ITEMS.register(FOOD);
 	}
 }

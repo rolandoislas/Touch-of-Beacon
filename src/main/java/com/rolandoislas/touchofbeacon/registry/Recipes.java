@@ -9,6 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionHelper;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
@@ -30,12 +31,7 @@ public class Recipes {
 					"CCC", "CMC", "BBB",
 					'C', craft.getCover(), 'M', craft.getCenter(), 'B', craft.getBase());
 			recipe.setRegistryName(item.getUnlocalizedName());
-			GameRegistry.register(recipe);
-			/*
-			GameRegistry.addShapedRecipe(new ResourceLocation(String.format("%s.item", item.getUnlocalizedName())),
-					new ResourceLocation(TouchOfBacon.MODID), item, "CCC", "CMC", "BBB",
-					'C', craft.getCover(), 'M', craft.getCenter(), 'B', craft.getBase());
-			*/
+			ForgeRegistries.RECIPES.register(recipe);
 		}
 
 		// Food blocks
@@ -48,21 +44,12 @@ public class Recipes {
 			ShapelessOreRecipe blockRecipe = new ShapelessOreRecipe(new ResourceLocation(TouchOfBacon.MODID), item,
 					items);
 			blockRecipe.setRegistryName(String.format("%s.item", item.getUnlocalizedName()));
-			GameRegistry.register(blockRecipe);
-			/*
-			GameRegistry.addShapelessRecipe(new ResourceLocation(String.format("%s.item", item.getUnlocalizedName())),
-					new ResourceLocation(TouchOfBacon.MODID), item,
-					Ingredient.fromItems(items));
-			// Block back to items
-			GameRegistry.addShapelessRecipe(new ResourceLocation(String.format("%s.item", item.getUnlocalizedName())),
-					new ResourceLocation(TouchOfBacon.MODID), new ItemStack(craft.getItem(), craft.getAmount()),
-					Ingredient.fromItem(item.getItem()));
-			*/
+			ForgeRegistries.RECIPES.register(blockRecipe);
 			// Block back to items
 			ShapelessOreRecipe itemRecipe = new ShapelessOreRecipe(new ResourceLocation(TouchOfBacon.MODID),
 					new ItemStack(craft.getItem(), craft.getAmount()), item);
 			itemRecipe.setRegistryName(String.format("%s.block", item.getUnlocalizedName()));
-			GameRegistry.register(itemRecipe);
+			ForgeRegistries.RECIPES.register(itemRecipe);
 		}
 		// Satiety Potions
 		PotionHelper.addMix(Potions.TYPE_FOOD, ModItems.FOOD, Potions.TYPE_FOOD);
