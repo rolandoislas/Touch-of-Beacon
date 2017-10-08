@@ -21,9 +21,9 @@ version =  version + "-build-T" + ext.build
 group = "com.rolandoislas.touchofbeacon"
 archivesBaseName = "touchofbeacon"
 
-sourceCompatibility = targetCompatibility = "1.6" // Need this here so eclipse task generates correctly.
+sourceCompatibility = targetCompatibility = "1.8" // Need this here so eclipse task generates correctly.
 compileJava {
-    sourceCompatibility = targetCompatibility = "1.6"
+    sourceCompatibility = targetCompatibility = "1.8"
 }
 
 minecraft {
