@@ -3,16 +3,20 @@ package com.rolandoislas.touchofbeacon.registry;
 import com.rolandoislas.touchofbeacon.TouchOfBacon;
 import com.rolandoislas.touchofbeacon.blocks.EnumFood;
 import com.rolandoislas.touchofbeacon.blocks.EnumTier;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.PotionTypes;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.potion.PotionHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Rolando on 10/30/2016.
@@ -52,10 +56,22 @@ public class Recipes {
 			ForgeRegistries.RECIPES.register(itemRecipe);
 		}
 		// Satiety Potions
-		PotionHelper.addMix(Potions.TYPE_FOOD, ModItems.FOOD, Potions.TYPE_FOOD);
-		PotionHelper.addMix(Potions.TYPE_FOOD_1, ModItems.FOOD, Potions.TYPE_FOOD_1);
-		PotionHelper.addMix(Potions.TYPE_FOOD_2, ModItems.FOOD, Potions.TYPE_FOOD_2);
-		PotionHelper.addMix(Potions.TYPE_FOOD_3, ModItems.FOOD, Potions.TYPE_FOOD_3);
+		List<ItemStack> foodItems = new ArrayList<>();
+		for (EnumFood food : EnumFood.values())
+			foodItems.add(new ItemStack(ModItems.FOOD, 1, food.getMeta()));
+		Ingredient foodIngredient = Ingredient.fromStacks(foodItems.toArray(new ItemStack[foodItems.size()]));
+		PotionHelper.addMix(PotionTypes.AWKWARD, foodIngredient, Potions.TYPE_FOOD);
+		PotionHelper.addMix(Potions.TYPE_FOOD, foodIngredient, Potions.TYPE_FOOD_1);
+		PotionHelper.addMix(Potions.TYPE_FOOD_1, foodIngredient, Potions.TYPE_FOOD_2);
+		PotionHelper.addMix(Potions.TYPE_FOOD_2, foodIngredient, Potions.TYPE_FOOD_3);
+
+		// Quenched Potions
+		Ingredient quenchedIngredient = Ingredient.fromStacks(new ItemStack(Items.MELON),
+				new ItemStack(Blocks.MELON_BLOCK));
+		PotionHelper.addMix(PotionTypes.AWKWARD, quenchedIngredient, Potions.TYPE_QUENCH);
+		PotionHelper.addMix(Potions.TYPE_QUENCH, quenchedIngredient, Potions.TYPE_QUENCH_1);
+		PotionHelper.addMix(Potions.TYPE_QUENCH_1, quenchedIngredient, Potions.TYPE_QUENCH_2);
+		PotionHelper.addMix(Potions.TYPE_QUENCH_2, quenchedIngredient, Potions.TYPE_QUENCH_3);
 
 		// Levitation Potions
 		PotionHelper.addMix(PotionTypes.AWKWARD, Items.FEATHER, Potions.TYPE_LEVITATION);
