@@ -22,14 +22,20 @@ tile.touchofbeacon.food.apple.name=Apple Block
 itemGroup.touchofbeacon=Touch of Beacon
 
 effect.touchofbeacon.food=Fed
+effect.touchofbeacon.quenched=Quenched
 
 potion.potency.3=IV
 potion.potency.99=C
 
 potion.effect.touchofbeacon.food=Potion of Satiety
-
 splash_potion.effect.touchofbeacon.food=Splash Potion of Satiety
-
 lingering_potion.effect.touchofbeacon.food=Lingering Potion of Satiety
-
 tipped_arrow.effect.touchofbeacon.food=Arrow of Satiety
+
+potion.effect.touchofbeacon.quench=Potion of Quenching
+splash_potion.effect.touchofbeacon.quench=Splash Potion of Quenching
+lingering_potion.effect.touchofbeacon.quench=Lingering Potion of Quenching
+tipped_arrow.effect.touchofbeacon.quench=Arrow of Quenching
+
+touchofbeacon.message.beacon.missing_water=Missing: pool of water around beacon with a radius of %d blocks
+touchofbeacon.message.beacon.missing_base=Missing: beacon base

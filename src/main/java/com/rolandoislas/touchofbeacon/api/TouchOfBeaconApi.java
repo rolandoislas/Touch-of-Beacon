@@ -13,6 +13,8 @@ public class TouchOfBeaconApi {
 	private static Method applyFedToPlayersAround = null;
 	private static Method applyFedToPlayer = null;
 	private static boolean postInit;
+	private static Method applyQuenchedToPlayersAround;
+	private static Method applyQuenchedToPlayer;
 
 	/**
 	 * Apply an ambient Fed potion effect to players in a radius.
@@ -47,6 +49,38 @@ public class TouchOfBeaconApi {
 	}
 
 	/**
+	 * Apply an ambient "Quenched" potion effect to players in a radius.
+	 * The effect duration is 5 seconds + 5 per potency level.
+	 * @param world world of origin block
+	 * @param pos origin block
+	 * @param radius radius of player search
+	 * @param potency tier of effect to apply
+	 */
+	public static void applyQuenchedToPlayersAround(World world, BlockPos pos, double radius, int potency) {
+		init();
+		if (applyQuenchedToPlayersAround == null)
+			return;
+		try {
+			applyQuenchedToPlayersAround.invoke(null, world, pos, radius, potency);
+		} catch (Exception ignore) {}
+	}
+
+	/**
+	 * Apply an ambient "Quenched" potion effect to a player.
+	 * The effect duration is 5 seconds + 5 per potency level.
+	 * @param player player that will receive the effect
+	 * @param potency tier of effect to apply
+	 */
+	public static void applyQuenchedToPlayer(EntityPlayer player, int potency) {
+		init();
+		if (applyQuenchedToPlayer == null)
+			return;
+		try {
+			applyQuenchedToPlayer.invoke(null, player, potency);
+		} catch (Exception ignore) {}
+	}
+
+	/**
 	 * Call methods via reflection
 	 */
 	private static void init() {
@@ -57,6 +91,9 @@ public class TouchOfBeaconApi {
 			applyFedToPlayer = foodUtil.getMethod("applyFedToPlayer", EntityPlayer.class, int.class);
 			applyFedToPlayersAround = foodUtil.getMethod("applyFedToPlayersAround", World.class, BlockPos.class,
 					double.class, int.class);
+			applyQuenchedToPlayer = foodUtil.getMethod("applyQuenchedToPlayer", EntityPlayer.class, int.class);
+			applyQuenchedToPlayersAround = foodUtil.getMethod("applyQuenchedToPlayersAround", World.class,
+					BlockPos.class, double.class, int.class);
 		}
 		catch (ClassNotFoundException | NoSuchMethodException e) {
 			e.printStackTrace();
