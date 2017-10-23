@@ -10,13 +10,26 @@ buildscript {
     }
 }
 
+repositories {
+    maven {
+        // location of the maven that hosts JEI files
+        name = "Progwml6 maven"
+        url = "http://dvs1.progwml6.com/files/maven"
+    }
+    maven {
+        // location of a maven mirror for JEI files, as a fallback
+        name = "ModMaven"
+        url = "modmaven.k-4u.nl"
+    }
+}
+
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: "com.matthewprenger.cursegradle"
 
 
 ext.build = System.getenv('TRAVIS_BUILD_NUMBER')
 ext.tag = System.getenv("TRAVIS_TAG")
-version = "1.11.2-1.1.1"
+version = "1.11.2-1.2"
 version =  version + "-build-T" + ext.build
 group = "com.rolandoislas.touchofbeacon"
 archivesBaseName = "touchofbeacon"
@@ -30,6 +43,7 @@ minecraft {
     version = "1.11.2-13.20.0.2228"
     runDir = "run"
     mappings = "snapshot_20161220"
+    replace("@VERSION", project.version)
 }
 
 if (ext.tag) {
