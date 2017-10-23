@@ -2,6 +2,7 @@ package com.rolandoislas.touchofbeacon.registry;
 
 import com.rolandoislas.touchofbeacon.blocks.EnumFood;
 import com.rolandoislas.touchofbeacon.blocks.EnumTier;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.PotionTypes;
 import net.minecraft.item.Item;
@@ -10,6 +11,8 @@ import net.minecraft.potion.PotionHelper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+
+import java.util.function.Predicate;
 
 /**
  * Created by Rolando on 10/30/2016.
@@ -46,6 +49,14 @@ public class Recipes {
 		PotionHelper.registerPotionTypeConversion(Potions.TYPE_FOOD_1, foodBlockPredicate, Potions.TYPE_FOOD_2);
 		PotionHelper.registerPotionTypeConversion(Potions.TYPE_FOOD_2, foodBlockPredicate, Potions.TYPE_FOOD_3);
 		PotionHelper.registerPotionTypeConversion(Potions.TYPE_FOOD_3, foodBlockPredicate, PotionTypes.THICK);
+
+		// Quenched Potions
+		Predicate<ItemStack> quenchedIngredient = input -> input != null &&
+				(input.isItemEqual(new ItemStack(Items.MELON)) || input.isItemEqual(new ItemStack(Blocks.MELON_BLOCK)));
+		PotionHelper.registerPotionTypeConversion(PotionTypes.AWKWARD, quenchedIngredient::test, Potions.TYPE_QUENCH);
+		PotionHelper.registerPotionTypeConversion(Potions.TYPE_QUENCH, quenchedIngredient::test, Potions.TYPE_QUENCH_1);
+		PotionHelper.registerPotionTypeConversion(Potions.TYPE_QUENCH_1, quenchedIngredient::test, Potions.TYPE_QUENCH_2);
+		PotionHelper.registerPotionTypeConversion(Potions.TYPE_QUENCH_2, quenchedIngredient::test, Potions.TYPE_QUENCH_3);
 
 		// Levitation Potions
 		PotionHelper.ItemPredicateInstance featherPredicate = new PotionHelper.ItemPredicateInstance(Items.FEATHER);
