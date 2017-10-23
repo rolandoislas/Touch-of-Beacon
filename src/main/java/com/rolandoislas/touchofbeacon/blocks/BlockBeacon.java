@@ -1,6 +1,7 @@
 package com.rolandoislas.touchofbeacon.blocks;
 
 import com.rolandoislas.touchofbeacon.TouchOfBacon;
+import com.rolandoislas.touchofbeacon.data.Constants;
 import com.rolandoislas.touchofbeacon.registry.ModCreativeTabs;
 import com.rolandoislas.touchofbeacon.tileentity.TileEntityBeacon;
 import net.minecraft.block.properties.PropertyEnum;
@@ -14,7 +15,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.Loader;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -66,7 +70,22 @@ public class BlockBeacon extends net.minecraft.block.BlockBeacon {
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
-		return false;
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand,
+									@Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
+		if (world.isRemote)
+			return true;
+		TileEntity beacon = world.getTileEntity(pos);
+		if (!(beacon instanceof TileEntityBeacon))
+			return false;
+		if (!((TileEntityBeacon)beacon).isComplete())
+			player.addChatMessage(new TextComponentTranslation(
+					TouchOfBacon.MODID + ".message.beacon.missing_base"
+			));
+		if (!((TileEntityBeacon)beacon).hasWater() && Loader.isModLoaded(Constants.MOD_ID_THOUGH_AS_NAILS))
+			player.addChatMessage(new TextComponentTranslation(
+					TouchOfBacon.MODID + ".message.beacon.missing_water",
+					getMetaFromState(world.getBlockState(pos)) + 1
+			));
+		return true;
 	}
 }
