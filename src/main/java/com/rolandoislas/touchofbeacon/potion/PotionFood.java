@@ -10,6 +10,8 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 
+import java.awt.*;
+
 /**
  * Created by Rolando on 10/31/2016.
  */
@@ -17,7 +19,7 @@ public class PotionFood extends Potion {
 	ResourceLocation icon = new ResourceLocation(TouchOfBacon.MODID, "textures/icons/potion_fed.png");
 
 	public PotionFood() {
-		super(false, 1);
+		super(false, new Color(155, 63, 68).getRGB());
 		this.setRegistryName("fed");
 		this.setPotionName("effect." + TouchOfBacon.MODID + ".food");
 		this.setBeneficial();
